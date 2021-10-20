@@ -40,6 +40,15 @@ def selection_sort(lista):
             lista[j] = lista[min_index]
             lista[min_index] = aux
 
+def bubble_sort(lista):
+    n = len(lista)
+    for j in range(n-1):
+        for i  in range(n-1):
+            if lista[i] > lista[i+1]:
+                #troca de elementos da posição i e i+1
+                lista[i],lista[i+1] = lista[i+1],lista[i]
+    return lista
+
 def criacao_lista_ord(total):
     #criação de lista ordenada
     a = []
@@ -51,7 +60,8 @@ def criacao_lista_random(total_elementos,min=1,max=1000):
     lista = random.sample(range(min,max),total_elementos)
     return lista
 
-print(criacao_lista_random(42,500))
+a = criacao_lista_random(42,500)
+print(bubble_sort(a))
 
             
 
