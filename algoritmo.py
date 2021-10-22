@@ -1,6 +1,46 @@
 import timeit
 import random
 
+def insertion_sort(lista):
+    n = len(lista)
+    for i in range(1,n):
+        chave = lista[i]
+        j = i-1
+        while(j>=0 and lista[j]>chave):
+            lista[j+1] = lista[j]
+            j = j-1
+        lista[j+1] = chave
+    return lista 
+
+
+def mergesort(lista,inicio = 0,fim = None):
+    if fim is None:
+        fim = len(lista)
+    if(fim - inicio > 1):
+        meio = (fim+inicio)//2
+        mergesort(lista,inicio,meio)
+        mergesort(lista,meio,fim)
+        merge(lista,inicio,meio,fim)
+    return lista
+
+def merge(lista,inicio,meio,fim):
+    left = lista[inicio:meio]     
+    right = lista[meio:fim]
+    top_l,top_r = 0,0
+    for i in range(inicio,fim):
+        if top_l >= len(left):
+            lista[i] = right[top_r]  
+            top_r = top_r+1
+        elif top_r >= len(right):
+            lista[i] = left[top_l]
+            top_l = top_l + 1            
+        elif (left[top_l] < right[top_r]):
+           lista[i] = left[top_l]
+           top_l = top_l + 1
+        else:
+            lista[i] = right[top_r]  
+            top_r = top_r+1
+    return lista
 def busca_binaria(lista_ordenada,elemento_procurado):
     primeiro = 0
     ultimo = len(lista_ordenada)-1
@@ -60,8 +100,8 @@ def criacao_lista_random(total_elementos,min=1,max=1000):
     lista = random.sample(range(min,max),total_elementos)
     return lista
 
-a = criacao_lista_random(42,500)
-print(bubble_sort(a))
+a = criacao_lista_random(42,0,250)
+print(mergesort(a))
 
             
 
